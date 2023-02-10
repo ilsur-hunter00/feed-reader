@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('request_url');
             $table->integer('response_code');
             $table->text('response_body');
-            $table->integer('request_time');
+            $table->string('request_time');
             $table->timestamps();
         });
     }
