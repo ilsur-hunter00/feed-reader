@@ -1,0 +1,34 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Feed reader API",
+        "description": "News parser",
+        "version": "1"
+    },
+    "servers": [
+        {
+            "url": "http://feed-reader.local/api/",
+            "description": "Local API Server"
+        }
+    ],
+    "paths": {
+        "/feeds": {
+            "get": {
+                "tags": [
+                    "Feeds"
+                ],
+                "summary": "Get list of feeds",
+                "description": "Returns list of feeds",
+                "operationId": "8d4014a995d46630be955ff177475115",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        }
+    }
+}

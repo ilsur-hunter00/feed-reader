@@ -22,6 +22,20 @@ class FeedController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *    path="/feeds",
+     *    tags={"Feeds"},
+     *    summary="Get list of feeds",
+     *    description="Returns list of feeds",
+     *    @OA\Response(
+     *        response=200,
+     *        description="Successful operation"
+     *    ),
+     *    @OA\Response(
+     *        response=422,
+     *        description="Validation Error"
+     *    )
+     * )
      * @param GetFeedsRequest $request
      * @return JsonResponse
      */
