@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
 
 class FeedParser extends Command
 {
@@ -54,13 +55,19 @@ class FeedParser extends Command
         $feeds = simplexml_load_string($feed);
 
         foreach ($feeds->channel->item as $feed) {
-            (new Feed())->create([
+            $feedItem = (new Feed())->create([
                 'name' => (string) $feed->title,
                 'description' => (string) $feed->description,
                 'publication_date' => (string) $feed->pubDate,
                 'author' => (string) $feed->author ?? null,
                 'image' => (string) $feed->enclosure['url'] ?? null,
             ]);
+
+            if (isset($feedItem->image) && !empty($feedItem->image)) {
+                $contents = file_get_contents($feedItem->image);
+                $name = substr($feedItem->image, strrpos($feedItem->image, '/') + 1);
+                Storage::put($name, $contents);
+            }
         }
     }
 }
